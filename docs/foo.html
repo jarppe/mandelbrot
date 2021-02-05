@@ -1,0 +1,38 @@
+<html>
+  <body>
+    <canvas id="myCanvas" width="800" height="800"></canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas")
+      const context = canvas.getContext("2d")
+
+      for (let px = 0; px < 200; px++) {
+        for (let py = 0; py < 200; py++) {
+          let i  = 0,
+              x0 = -2 + px / 50,
+              y0 = -2 + py / 50,
+              x  = 0,
+              y  = 0
+
+          let xt  = 0,
+              xsq = 0,
+              ysq = 0
+
+          do {
+            xsq = x * x
+            ysq = y * y
+            y = 2 * x * y + y0
+            x = xsq - ysq + x0
+            i++
+          }
+          while (i < 255 && (xsq + ysq) < 4)
+
+          const color = i.toString(16)
+          context.beginPath()
+          context.rect(px * 4, py * 4, 4, 4)
+          context.fillStyle = "#" + color + color + color
+          context.fill()
+        }
+      }
+    </script>
+  </body>
+</html>
