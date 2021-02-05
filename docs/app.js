@@ -13,14 +13,14 @@ const makePalette = (resolution) => {
 
   const cf = (g, cp, w) => (i) => g * (1.0 - (Math.abs(i - cp) / w))
 
-  const r = bound(cf(1.0, 0, resolution / 10.0))
-  const g = bound(cf(0.8, 0, resolution / 20.0))
-  const b = () => 0
+  const r = bound(cf(1.0, 0, resolution / 200.0))
+  const b = bound(cf(0.8, resolution / 200.0, resolution / 200.0))
+  const g = () => 0
 
   for (let i = 0; i < resolution; i++) {
     palette[i] = [r(i), g(i), b(i), 255]
   }
-
+  palette[resolution - 1] = [255, 255, 255, 255]
   return palette
 }
 
@@ -92,5 +92,5 @@ const draw = () => {
   console.timeEnd("Drawing")
 }
 
-//window.addEventListener("resize", draw)
+window.addEventListener("resize", draw)
 draw()
